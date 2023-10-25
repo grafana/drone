@@ -236,11 +236,11 @@ func (s Server) Handler() http.Handler {
 				).Post("/{number}/rollback", builds.HandleRollback(s.Repos, s.Builds, s.Triggerer))
 
 				r.With(
-					acl.CheckAdminAccess(),
+					acl.CheckWriteAccess(),
 				).Post("/{number}/decline/{stage}", stages.HandleDecline(s.Repos, s.Builds, s.Stages))
 
 				r.With(
-					acl.CheckAdminAccess(),
+					acl.CheckWriteAccess(),
 				).Post("/{number}/approve/{stage}", stages.HandleApprove(s.Repos, s.Builds, s.Stages, s.Scheduler))
 
 				r.With(
